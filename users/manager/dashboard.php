@@ -1,7 +1,6 @@
-<?php 
-session_start();
+<?php
+    session_start();
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,26 +17,8 @@ session_start();
         }
     </style>
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-3">
-                <form method="post" action="login_process.php" class="p-4 border rounded shadow">
-                    <h1 class="mt-3 text-center">Login Form</h1>
-                    <div class="mb-3">
-                        <label class="form-label">Email:</label>
-                        <input type="text" name="email" id="email" class="form-control custom-width" placeholder="email@gmail.com" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password:</label>
-                        <input type="password" name="password" id="password" class="form-control custom-width" />
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success mb-3" name="login">Login</button>
-                    </div>
-                </form>
-        </div>
-
-        <?php
+      <?php require '../../layout/sidebar.php'; ?>
+      <?php
             if(!empty($_SESSION['login_messages'])){
                 $error = $_SESSION['login_messages'];
                 echo "<script>
@@ -53,5 +34,5 @@ session_start();
             unset($_SESSION['toast']);
         }
         ?>
-
 </body>
+</html>
