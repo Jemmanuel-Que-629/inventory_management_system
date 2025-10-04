@@ -2,6 +2,22 @@
 session_start();
 require 'database/db_connection.php';
 
+// Check if user is already logged in and redirect to appropriate dashboard
+if (isset($_SESSION['user_id']) && isset($_SESSION['role_id'])) {
+    if ($_SESSION['role_id'] == 1) {
+        header("Location: users/admin/dashboard.php");
+    } elseif ($_SESSION['role_id'] == 2) {
+        header("Location: users/manager/dashboard.php");
+    } elseif ($_SESSION['role_id'] == 3) {
+        header("Location: users/staff/dashboard.php");
+    } else {
+        // Invalid role, destroy session and redirect to login
+        session_destroy();
+        header("Location: index.php");
+    }
+    exit();
+}
+
 if (isset($_POST['login'])) {
     $email    = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -14,15 +30,6 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
-
-        if ($row['status'] !== 'active') {
-            $_SESSION['login_messages'] = [
-                'type' => 'error',
-                'message' => 'Account is ' . $row['status']
-            ];
-            header("Location: index.php");
-            exit();
-        }
 
         if (password_verify($password, $row['password'])) {
             // ✅ Save user session data

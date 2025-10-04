@@ -18,6 +18,7 @@
     </style>
 <body>
       <?php require '../../layout/sidebar.php'; ?>
+      <?php require '../../layout/header.php'; ?>
       <?php
             if(!empty($_SESSION['login_messages'])){
                 $error = $_SESSION['login_messages'];

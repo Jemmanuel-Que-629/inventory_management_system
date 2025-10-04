@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inventory Management System</title>
+        <title>Admin - Dashboard</title>
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.12.2/sweetalert2.min.css">
@@ -18,6 +18,7 @@
     </style>
 <body>
       <?php require '../../layout/sidebar.php'; ?>
+      <?php require '../../layout/header.php'; ?>
       <?php
             if(!empty($_SESSION['login_messages'])){
                 $error = $_SESSION['login_messages'];
@@ -31,7 +32,7 @@
                         timer: 3000
             });
             </script>";
-            unset($_SESSION['toast']);
+            unset($_SESSION['login_messages']);
         }
         ?>
 </body>

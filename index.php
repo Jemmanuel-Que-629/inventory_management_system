@@ -1,5 +1,20 @@
 <?php 
 session_start();
+
+// Check if user is already logged in and redirect to appropriate dashboard
+if (isset($_SESSION['user_id']) && isset($_SESSION['role_id'])) {
+    if ($_SESSION['role_id'] == 1) {
+        header("Location: users/admin/dashboard.php");
+    } elseif ($_SESSION['role_id'] == 2) {
+        header("Location: users/manager/dashboard.php");
+    } elseif ($_SESSION['role_id'] == 3) {
+        header("Location: users/staff/dashboard.php");
+    } else {
+        // Invalid role, destroy session and continue to login
+        session_destroy();
+    }
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
